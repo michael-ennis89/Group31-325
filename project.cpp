@@ -1,5 +1,7 @@
 #include <vector>
 #include <iostream>
+#include <string>
+#include <fstream>
 
 struct city{
 public:
@@ -29,15 +31,33 @@ void graph::addCity(int cityName, int x_cord, int y_cord)
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     graph myGraph;
 
-    myGraph.addCity(1, 20, 25);
-    myGraph.addCity(2, 21, 26);
+    // Change to 3 with Usage <filename> <option> when implemented.
+    /*if(argc != 2)
+    {
+        std::cout << "USAGE: <filename>" << std::endl;
+        return 1;
+    }*/
 
-    std::cout << "City 0: " << myGraph.graphCity[0]->name << " " << myGraph.graphCity[0]->x << " " << myGraph.graphCity[0]->y << " visited: " << myGraph.graphCity[0]->visited << std::endl;
-    std::cout << "City 1: " << myGraph.graphCity[1]->name << " " << myGraph.graphCity[1]->x << " " << myGraph.graphCity[1]->y << " visited: " << myGraph.graphCity[1]->visited << std::endl;
-    std::cout << "City Count: " << myGraph.cities << std::endl;
+    std::ifstream inputFile;
+    std::string fileName;
+    fileName = "tsp_example_1.txt"; //argv[1]; // Hard Coded for because my compiler sucks
+    inputFile.open(fileName);
+    int intName, intX, intY, i;
+
+    while(inputFile >> intName >> intX >> intY)
+    {
+        myGraph.addCity(intName, intX, intY);
+    }
+
+    // Example to print out created graph.
+    for(i = 0; i < myGraph.cities; i++)
+    {
+        std::cout << "City: " << myGraph.graphCity[i]->name << " x: " << myGraph.graphCity[i]->x << " y: " << myGraph.graphCity[i]->y << std::endl;
+    }
+
     return 0;
 }
