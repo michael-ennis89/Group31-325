@@ -85,21 +85,20 @@ int main(int argc, char* argv[])
     {
         //Determines how many times to run the RNNA Algorithm to keep under 3 minutes.
         // ***Values need to be determined.***
-        /*
-        if(myGraph.cities >= 0 && myGraph.cities =< 10000)
+
+        if(myGraph.cities >= 0 && myGraph.cities <= 50)
         {
             runAmount = myGraph.cities;
         }
-        else if(myGraph.cities >= 10001 && (myGraph.cities <= 50000)
+        else if(myGraph.cities >= 51 && myGraph.cities <= 300)
         {
-            runAmount = 200;
+            runAmount = 51;
         }
-        */
         if(overrideOption == 1)    // Override option for unlimited time run.
         {
             runAmount = myGraph.cities;
         }
-        runAmount = myGraph.cities; // Remove after if-else above is determined.
+        //runAmount = myGraph.cities; // Remove after if-else above is determined.
         RNNAPath = new int[myGraph.cities];
         distance = repetitivenearestNeighbor(myGraph, RNNAPath, runAmount);
         printPath(distance, RNNAPath, myGraph.cities, fileName);
